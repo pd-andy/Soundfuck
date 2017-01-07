@@ -1,0 +1,29 @@
+# Set the root note to c#
++
+# Set the scale to natural minor (Aeolian mode)
+>+++++
+# Beat timing to 1/8 notes
+>+
+# Synth voices start at index 3
+>
+# Shift up an octave so we can go below the root note
++++++++
+# Up three octaves for the melody
+>+++++++++++++++++++++<
+# Write the loop
+#1 [.>----.>>>.]
+#& [<<<-.>>>>>>.]
+#2 [<<.<<<<]
+#& [,<,>>>>>>>.]
+#3 [<<<.<<<<.++.>.]
+#& [>>>>>>.]
+#4 [<<.]
+#& [>>.]
+#1 [<<<.<<<-.<---.]
+#& [>>>>>>>.]
+#2 [<<.<<<<<-.>+.]
+#& [>>>>>>.]
+#3 [<<<.<<<<,>,]
+#& [+++++.>>>>>>.]
+#4 [<<.<<<<-.]
+#& [--.>>>>>>.]

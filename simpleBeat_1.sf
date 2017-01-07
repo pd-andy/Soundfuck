@@ -1,0 +1,15 @@
+# The third index controls the duration of the beat
+>>
+# Increment 1 for 1/8 note length
++
+# Drum voices start at index 7
+>>>>>
+# Write the groove
+#1 [.>>.]
+#& [,]
+#2 [.<.]
+#& [<.>>,]
+#3 [.]
+#& [<<.>>,]
+#4 [.<.]
+#& [>,]

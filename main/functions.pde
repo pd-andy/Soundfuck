@@ -1,0 +1,172 @@
+void inputCallback(File file) {
+  sf.loadFile(file);
+  
+  sfFilePath = sf.getPath();
+  println(sf.getPath());
+  
+  sfFileText = sf.getText();
+  println(sfFileText);
+  
+  sf.readFile(sfFileText);
+  
+  setValues();
+  
+  thread("play");
+}
+
+void setValues() {
+  sfArray      = sf.getArray(); 
+  sfArrayP     = sf.getArrayP();
+  sfMusic      = sf.getMusic(); 
+  sfRootNote   = sfArray[0]; 
+  sfScale      = scales[sfArray[1]]; 
+  sfNoteLength = timing[sfArray[2]];
+}
+
+void updateValues() {
+  sfRootNote   = sfArray[0];  
+  sfScale      = scales[sfArray[1]]; 
+  sfNoteLength = timing[sfArray[2]];
+}
+
+void play() {
+  sfMusicP = 0;
+  while(isPlaying) {
+    if(sfMusicP==0) {
+      reset();
+      sf.loadFromPath(sfFilePath);
+      sfFileText = sf.getText();
+      sf.readFile(sfFileText);
+      setValues();
+    }
+    readMusic(sfMusic.get(sfMusicP));  
+    sfMusicP = (sfMusicP+1) % sfMusic.size();
+  }
+  reset();
+}
+
+void readMusic(String phrase) {
+  for (int i = 0; i < phrase.length(); i++) {
+    switch (phrase.charAt(i)) {
+      case '<':
+        sfArrayP = (sfArrayP - 1) % sfArray.length;
+        break;
+      case '>':
+        sfArrayP = (sfArrayP + 1) % sfArray.length;
+        break;
+      case '+':
+        sfArray[sfArrayP]++;
+        break;
+      case '-':
+        sfArray[sfArrayP]--;
+        break;
+      case '.':
+        switch (sfArrayP) {
+          case 3:
+            pd.sendFloat("osc1", float(sfScale[sfArray[3]%sfScale.length] + sfRootNote));
+            pd.sendFloat("noteOn1", 0.2);
+            break;
+          case 4:
+            pd.sendFloat("osc2", float(sfScale[sfArray[4]%sfScale.length] + sfRootNote));
+            pd.sendFloat("noteOn2", 0.2);
+            break;
+          case 5:
+            pd.sendFloat("osc3", float(sfScale[sfArray[5]%sfScale.length] + sfRootNote));
+            pd.sendFloat("noteOn3", 0.2);
+            break;
+          case 6:
+            pd.sendFloat("osc4", float(sfScale[sfArray[6]%sfScale.length] + sfRootNote));
+            pd.sendFloat("noteOn4", 0.2);
+            break;
+          case 7:
+            pd.sendFloat("drumVel1", 0.2);
+            pd.sendBang("drum1");
+            break;
+          case 8:
+            pd.sendFloat("drumVel2", 0.2);
+            pd.sendBang("drum2");
+            break;
+          case 9:
+            pd.sendFloat("drumVel3", 0.2);
+            pd.sendBang("drum3");
+            break;
+          case 10:
+            pd.sendFloat("drumVel4", 0.2);
+            pd.sendBang("drum4");
+            break;
+          case 11:
+            pd.sendFloat("drumVel5", 0.2);
+            pd.sendBang("drum5");
+            break;
+          case 12:
+            pd.sendFloat("drumVel6", 0.2);
+            pd.sendBang("drum6");
+            break;
+          case 13:
+            pd.sendFloat("drumVel7", 0.2);
+            pd.sendBang("drum7");
+            break;
+        }
+        break;
+      case ',':
+        switch (sfArrayP) {
+          case 3:
+            pd.sendFloat("noteOn1", 0);
+            break;
+          case 4:
+            pd.sendFloat("noteOn2", 0);
+            break;
+          case 5:
+            pd.sendFloat("noteOn3", 0);
+            break;
+          case 6:
+            pd.sendFloat("noteOn4", 0);
+            break;
+          case 7:
+            pd.sendFloat("drumVel1", 0.1);
+            pd.sendBang("drum1");
+            break;
+          case 8:
+            pd.sendFloat("drumVel2", 0.1);
+            pd.sendBang("drum2");
+            break;
+          case 9:
+            pd.sendFloat("drumVel3", 0.1);
+            pd.sendBang("drum3");
+            break;
+          case 10:
+            pd.sendFloat("drumVel4", 0.1);
+            pd.sendBang("drum4");
+            break;
+          case 11:
+            pd.sendFloat("drumVel5", 0.1);
+            pd.sendBang("drum5");
+            break;
+          case 12:
+            pd.sendFloat("drumVel6", 0.1);
+            pd.sendBang("drum6");
+            break;
+          case 13:
+            pd.sendFloat("drumVel7", 0.1);
+            pd.sendBang("drum7");
+            break;
+        }
+        break;
+    }
+    updateValues();
+  }
+  delay(sfNoteLength);
+}
+
+void reset() {
+  sfArray = new int[14];
+  sfMusic.clear();
+  
+  sfArrayP = 0;
+  sfMusicP = 0;
+  
+  pd.sendFloat("noteOn1", 0);
+  pd.sendFloat("noteOn2", 0);
+  pd.sendFloat("noteOn3", 0);
+  pd.sendFloat("noteOn4", 0);
+}
