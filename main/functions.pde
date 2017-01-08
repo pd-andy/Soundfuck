@@ -1,16 +1,10 @@
 void inputCallback(File file) {
-  sf.loadFile(file);
-  
-  sfFilePath = sf.getPath();
-  println(sf.getPath());
-  
+  sf.loadFile(file);  
+  sfFilePath = sf.getPath(); 
   sfFileText = sf.getText();
-  println(sfFileText);
-  
   sf.readFile(sfFileText);
-  
   setValues();
-  
+
   thread("play");
 }
 
@@ -32,6 +26,8 @@ void updateValues() {
 void play() {
   sfMusicP = 0;
   while(isPlaying) {
+    // If statement reloads the script at the start of everyloop.
+    // Allows us to livecode while keeping in time.
     if(sfMusicP==0) {
       reset();
       sf.loadFromPath(sfFilePath);
@@ -39,12 +35,17 @@ void play() {
       sf.readFile(sfFileText);
       setValues();
     }
-    readMusic(sfMusic.get(sfMusicP));  
+    // Access ArrayLists with .get() rather than [].
+    readMusic(sfMusic.get(sfMusicP)); 
+    // Modulo wraps the pointer round so we can loop.
     sfMusicP = (sfMusicP+1) % sfMusic.size();
   }
   reset();
 }
 
+// Similar function to sf.readFile, with slightly different
+// functionality. Any erroneous [ and ] are ignored and added
+// switch statements for '.' and ',' to send messages to pd.
 void readMusic(String phrase) {
   for (int i = 0; i < phrase.length(); i++) {
     switch (phrase.charAt(i)) {
