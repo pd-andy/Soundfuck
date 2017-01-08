@@ -1,13 +1,15 @@
 # Soundfuck
 A livecoding brainfuck interpreter written in Processing + Pd
 
-[![IMAGE ALT TEXT HERE](https://github.com/pd-andy/Soundfuck/blob/master/media/Example%20Screenshot.png)](https://vimeo.com/198578860)
+[![Livecoding a basic beat](https://github.com/pd-andy/Soundfuck/blob/master/media/Example%20Screenshot_1.png)](https://vimeo.com/198578860)
 
 ## What is it?
 Soundfuck is the answer to the question "How can we make writing music as unintuitive as possible?" Soundfuck (Sf for short) is an interpreter for the somewhat infamous esolang Brainfuck. Making use of a lexicon of just 8 characters, it is possible to write fairly complicated music; complete with key modulation and access to the 7 western modes.
 
 ## OK but why?
 Sf began as a small experiment to have some fun with Brainfuck. Now though, the project has evolved to challenge conventional music making practice. When writing we tend to think in what I call 'horizontal blocks', that is, chunks of music going from left to right. Additionally it can be easy to think on a instrument-by-instrument or track-by-track basis; "first the melody will go like this, and under it I'll add these chords..." etc. I like to think Sf challenges that way of thinking and forces the composer to think 'vertically'. In order to effectively compose in Sf you must compose moment-by-moment, considering what each track is doing before moving on to the next step.
+
+[![A simple melody and drum beat](https://github.com/pd-andy/Soundfuck/blob/master/media/Example%20Screenshot_2.png)](https://vimeo.com/198584939)
 
 ## I'm a glutton for punishment, how does it work?
 
