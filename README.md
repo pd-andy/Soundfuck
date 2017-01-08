@@ -1,7 +1,7 @@
 # Soundfuck
 A livecoding brainfuck interpreter written in Processing + Pd
 
-[![IMAGE ALT TEXT HERE](https://github.com/pd-andy/Soundfuck/blob/master/Example%20Screenshot.png)](https://vimeo.com/198578860)
+[![IMAGE ALT TEXT HERE](https://github.com/pd-andy/Soundfuck/blob/master/media/Example%20Screenshot.png)](https://vimeo.com/198578860)
 
 ## What is it?
 Soundfuck is the answer to the question "How can we make writing music as unintuitive as possible?" Soundfuck (Sf for short) is an interpreter for the somewhat infamous esolang Brainfuck. Making use of a lexicon of just 8 characters, it is possible to write fairly complicated music; complete with key modulation and access to the 7 western modes.
