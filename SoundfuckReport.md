@@ -100,7 +100,7 @@ for(int i = 0; i < musicBeat.length(); i++) {
     case '.':
       // Another switch here to check which channel to control
       ...
-      pd.sendFloat("osc1", float(sfScale[sfArray[3]%sfScale.length] + sfRootNote));
+      pd.sendFloat("osc1", float(sfScale[sfArray[3]] + sfRootNote));
       // OR
       pd.sendBang("drum1");
       break;
