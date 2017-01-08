@@ -5,6 +5,8 @@ void inputCallback(File file) {
   sf.readFile(sfFileText);
   setValues();
 
+  // thread() executes a function in a seperate thread
+  // to avoid blocking the main draw thread.
   thread("play");
 }
 
@@ -25,6 +27,8 @@ void updateValues() {
 
 void play() {
   sfMusicP = 0;
+  // isPlaying bool allows play() to loop infinitely
+  // in its own thread.
   while(isPlaying) {
     // If statement reloads the script at the start of everyloop.
     // Allows us to livecode while keeping in time.
@@ -64,6 +68,8 @@ void readMusic(String phrase) {
       case '.':
         switch (sfArrayP) {
           case 3:
+            // PureData doesn't distinguish ints from floats.
+            // sfArray[3]%sfScale.length wraps notes round if they go out of bounds.
             pd.sendFloat("osc1", float(sfScale[sfArray[3]%sfScale.length] + sfRootNote));
             pd.sendFloat("noteOn1", 0.2);
             break;
@@ -156,16 +162,19 @@ void readMusic(String phrase) {
     }
     updateValues();
   }
+  // Delaying the thread to achieve musical timing.
   delay(sfNoteLength);
 }
 
 void reset() {
   sfArray = new int[14];
+  // clear() method removes all elements in an ArrayList.
   sfMusic.clear();
   
   sfArrayP = 0;
   sfMusicP = 0;
   
+  // Mute all synth voices.
   pd.sendFloat("noteOn1", 0);
   pd.sendFloat("noteOn2", 0);
   pd.sendFloat("noteOn3", 0);
